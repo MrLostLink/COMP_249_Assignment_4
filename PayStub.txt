@@ -1,0 +1,19 @@
+
+Concordia user(ID number 1011032):  Barry Allen is a Grad TA and is eligible to teach, Annual pay: 6000.0, # Hours: 300.0, Hourly Rate: 20.0
+
+Concordia user(ID number 2011032):  Zed Masterofshadows is a Grad TA and is eligible to teach, Annual pay: 6000.0, # Hours: 300.0, Hourly Rate: 20.0
+
+Concordia user(ID number 2340234):  Yasuo theunforgiven is a Grad TA and is eligible to teach, Annual pay: 7200.0, # Hours: 300.0,Hourly Rate: 20.0
+
+Concordia user(ID number 3245678):  Kid FLash is a part time staff, Annual pay: 80.0, # of Months: 4, Monthly Pay: 20.0
+
+Concordia user(ID number 7689056):  Jay Gerrick part time staff with an additional commission rate, Annual pay: 104.0, # Months: 4, Monthly Pay: 20.0
+
+Concordia user(ID number 7654321):  Khazix TheInsect part time staff with an additional commission rate, Annual pay: 104.0, # Months: 4, Monthly Pay: 20.0
+
+Concordia user(ID number 4545219):  Impulse is a permanent faculty member, Annual pay: 20.0
+
+Concordia user(ID number 7079427):  Proffesor Zoom is an part time faculty member and paid: 9000.0, # hours: 400, Hourly Pay: 20.0
+
+Concordia user(ID number 1234567):  Rengar TheHunter is a permanent faculty member, Annual pay: 20.0
+
