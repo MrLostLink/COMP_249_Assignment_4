@@ -1,6 +1,13 @@
 package Assignment4;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
+
+import Assignment3.ConcordiaMembers;
 
 public class Game extends Player{
 
@@ -8,9 +15,7 @@ public class Game extends Player{
 	private int numOfProbs = 0;
 	private int lives=3;
 	private int Score;
-	private Block[][] board = new Block[size][size];
 
-	
 	public Game(){
 
 	}
@@ -39,7 +44,8 @@ public class Game extends Player{
 		Score = score;
 	}
 
-	
+	private Block[][] board = new Block[size][size];
+
 	//WILL CREATE NEW BOARD(NEW GAME)
 	public void createNewBoard(){
 		board = new Block[size][size];
@@ -62,14 +68,15 @@ public class Game extends Player{
 					board[a][b] = new Mines();
 				} 
 				else {
-					board[a][b] = null; //no blank/empty class so we cannot define it as anything when we add it to the game
+					board[a][b] = new Blank(0); //no blank/empty class so we cannot define it as anything when we add it to the game
 				}
 			}
 		}
 	}
 
-	//Reveals every block on board(Might have to put in GUI class)
 	
+	//Reveals every block on board(Might have to put in GUI class)
+
 	
 	//Method click on block
 	public void showBlock(int i, int j){
@@ -138,11 +145,13 @@ public class Game extends Player{
 	 * 
 	 * If int are returned, the GUI should reveal its value.
 	 */
-	private Object checkAround(int i,int j){
+	
+	
+	private int checkAround(int i,int j){
 
 		int blockOfMines = 0;
 		int numOfTreasuresFound =0;
-		boolean alreadyChecked = false;
+		boolean alreadyChecked;
 
 		for (int p = i - 1; p <= i + 1; p++)
 		{
@@ -168,7 +177,7 @@ public class Game extends Player{
 			return 0;
 		}
 		else{
-			return null;
+			//return index;
 		}
 	}
 

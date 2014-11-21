@@ -1,5 +1,10 @@
 package Assignment4;
 
-public class Blank {
+public class Blank extends Block{
 
+	private int numOfMinesAround;
+	
+	public Blank(){
+		
+	}
 }
