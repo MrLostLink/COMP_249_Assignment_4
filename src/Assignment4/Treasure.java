@@ -9,13 +9,13 @@ public class Treasure extends Block{
 	}
 	
 	//Player gets prob
-	public int getProbe(int numOfProb){
-		return numOfProb++;
+	public int getProbe(int numOfProbs){
+		return 1;
 	}
 	
 	//Player gets points
 	public void bonusPoints(int Points){
-		Points++;
+		Points+=500;
 	}
 	
 	//Player becomes immortal
