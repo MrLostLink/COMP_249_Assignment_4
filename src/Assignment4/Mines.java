@@ -14,13 +14,6 @@ public class Mines extends Block{
 	int end = 10;
 
 
-
-
-	public Mines() {
-		super();
-		
-	}
-
 	private int getNumOfMines() {
 
 		int num = r.nextInt((end-start)+1)+start;

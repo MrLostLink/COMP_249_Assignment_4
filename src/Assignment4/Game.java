@@ -9,17 +9,30 @@ import java.util.Random;
 
 import Assignment3.ConcordiaMembers;
 
-public class Game extends Player{
+public class Game{
 
-	private int size=10;
+	private static int size=10;
 	private int numOfProbs = 0;
 	private int lives=3;
 	private int Score;
-
-	public Game(){
-
-	}
+	static private Block[][] board = new Block[size][size];
 	
+	
+	
+	
+	
+	public int getScore() {
+		return Score;
+	}
+
+
+
+	public void setScore(int score) {
+		Score = score;
+	}
+
+
+
 	public int getNumOfProbs() {
 		return numOfProbs;
 	}
@@ -36,18 +49,10 @@ public class Game extends Player{
 		this.lives = lives;
 	}
 
-	public int getScore() {
-		return Score;
-	}
-
-	public void setScore(int score) {
-		Score = score;
-	}
-
-	private Block[][] board = new Block[size][size];
+	
 
 	//WILL CREATE NEW BOARD(NEW GAME)
-	public void createNewBoard(){
+	public Block[][] createNewBoard(){
 		board = new Block[size][size];
 		
 		Random r = new Random();
@@ -63,15 +68,21 @@ public class Game extends Player{
 				
 				if(num <=1 && num < 4){
 					board[a][b] = new Treasure();
+					//System.out.println("Treasure made");
 				}
 				if(num <=4 && num < 9){
 					board[a][b] = new Mines();
+					//System.out.println("Mines made");
 				} 
 				else {
-					board[a][b] = new Blank(0); //no blank/empty class so we cannot define it as anything when we add it to the game
+					board[a][b] = new Blank();
+					//System.out.println("Blank made");
 				}
 			}
 		}
+		addNumbers(board);
+		
+		return board;
 	}
 
 	
@@ -79,30 +90,30 @@ public class Game extends Player{
 
 	
 	//Method click on block
-	public void showBlock(int i, int j){
-		if(board[i][j].checkBlock() instanceof Mines){
-			stepOnMine(i,j);
-		}else if(board[i][j].checkBlock() instanceof Treasure){
-			stepOnTreasure(i,j);
+	public void showBlock(Block b){
+		if(b instanceof Mines){
+			stepOnMine();
+		}else if(b instanceof Treasure){
+			stepOnTreasure();
 		} else {
 			//PROBLEM HERE, EMPTY(BLANK blocks are null)
-			stepOnEmpty(i,j);
+			stepOnEmpty();
 		}
 			
 	}
 	
 	//Create method land on mine(What game will do when player lands on mine(s))
-	private void stepOnMine(int i, int j){
+	private void stepOnMine(){
 		
-		((Mines) board[i][j]).mineDamage(lives);
+		((Mines) board).mineDamage(getLives());
 		
-		if(lives <= 0){
+		if(getLives() <= 0){
 			//gameover
 		}
 	}
 
 	//Create method land on treasure(What game will do if lands on treasure)
-	private void stepOnTreasure(int i, int j){
+	private void stepOnTreasure(){
 		Random r = new Random();
 		int start = 1;
 		int end = 30;
@@ -111,19 +122,19 @@ public class Game extends Player{
 		
 		if(num%2==0 && num<=10){
 			
-			((Treasure) board[i][j]).getProbe(numOfProbs);//(5/30)
+			((Treasure) board).getProbe(getNumOfProbs());//(5/30)
 			return;
 			
 		} else{
 			if(num == 2){
-				((Treasure) board[i][j]).immortal();//(1/30)
+				((Treasure) board).immortal();//(1/30)
 				return;
 			
 			} else if(num%2!=0 && num>=16 ){
-				((Treasure) board[i][j]).getLives(3);//(8/30)
+				((Treasure) board).getLives(3);//(8/30)
 				return;
 			} else {
-				((Treasure) board[i][j]).bonusPoints(500);//(16/30)
+				((Treasure) board).bonusPoints(500);//(16/30)
 				return;
 			}
 		}
@@ -134,55 +145,32 @@ public class Game extends Player{
 	 * If user step on neither mine nor treasure.
 	 * This method will call method checkAround to determine whether it is blank or has a number associated to it
 	 */
-	private void stepOnEmpty(int i,int j){
+	private void stepOnEmpty(){
 		Score+=100;
-		checkAround(i,j);
 		
 	}
 
-	/*
-	 * Check around a specific block and return # of mines found (can only be used for blank blocks)
-	 * 
-	 * If int are returned, the GUI should reveal its value.
-	 */
 	
-	
-	private int checkAround(int i,int j){
-
-		int blockOfMines = 0;
-		int numOfTreasuresFound =0;
-		boolean alreadyChecked;
-
-		for (int p = i - 1; p <= i + 1; p++)
-		{
-			for (int q = j - 1; q <= j + 1; q++)
-			{	
-				if(alreadyChecked == false){
-				if (board[p][q] !=null && board[p][q] instanceof Mines)
-					blockOfMines++;
-					alreadyChecked = true;
-				if (board[p][q] !=null && board[p][q] instanceof Treasure)
-					numOfTreasuresFound++;
-					alreadyChecked = true;
+	private void addNumbers(Block[][] block){
+		for(int i =0;i<block.length;i++){
+			for(int j = 0;j<block.length;j++){
+				if(block[i][j] instanceof Mines){
+					
+					for(int a=i-1;a<=i+1;a++){
+						for(int b=j-1;b<=j+1;b++){
+							try{
+							block[a][b].setNumOfMinesAround(1);
+							} catch (Exception ArrayIndexOutOfBoundsException){
+								
+							}
+						}
+					}
+					
 				}
 			}
 		}
-		
-		//Should system out a warning that a treasure is close
-		System.out.println("Treasure nearby");
-
-		if(blockOfMines==0){
-			
-			Score+=100;
-			return 0;
-		}
-		else{
-			//return index;
-		}
 	}
+	
 
-	//Recursion method(only when empty space is blank)
-	private static void revealAllNearbyBlank(int i,int j){
-		
-	}
+	
 }

@@ -9,7 +9,7 @@ public class Driver {
 		// TODO Auto-generated method stub
 		//Menu Game = new Menu();
 		//int size = 10;
-		Player minecraft = new Player();
+		//Player minecraft = new Player();
 		//Game.createBoard(size);
 		//Game.printBoard();
 	}

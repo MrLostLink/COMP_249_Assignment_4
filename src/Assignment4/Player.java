@@ -10,12 +10,42 @@ import java.io.ObjectOutputStream;
 
 public class Player {
 	
-
+	private MinesweeperGUI playerGame = new MinesweeperGUI();
+	private String username;
+	private int finalScore;
+	
 	public Player(){
 		
 	}
 
 	
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+
+
+	public MinesweeperGUI getPlayerGame() {
+		return playerGame;
+	}
+
+
+
+	public void setPlayerGame(MinesweeperGUI playerGame) {
+		this.playerGame = playerGame;
+	}
+
+
+
+	//Save board(Save game)[prints dat. file]
 	private static void writeToSerializedFile(File file, Player player) {
 	    try {
 	        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
@@ -27,6 +57,8 @@ public class Player {
 	    }
 	}
 	
+	
+	//Load board(Load game)[reads dat. file]
 	private static Player readFromSerializedFile(File file) {
 	    Player player = null;
 	    try {
@@ -42,5 +74,4 @@ public class Player {
 	    return player;
 	}
 
-	
 }
