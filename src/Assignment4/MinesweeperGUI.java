@@ -32,6 +32,7 @@ public class MinesweeperGUI extends JFrame {
 		gameGUI.setSize(335, 450); // 400 550
 		gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // This will close the frame when you press X.
 		// ^ IMPORTANT
+		gameGUI.setResizable(false); //Disables Resize
 		gameGUI.getContentPane().setBackground(Color.CYAN);
 		gameGUI.setLayout(null);
 
