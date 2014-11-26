@@ -205,41 +205,45 @@ public class MinesweeperGUI extends JFrame{
 
 		//Checks that block is blank & 0
 
-		if(blockBoard[i][j].getNumOfMinesAround() == 0){
-			System.out.println("works");
+		if(blockBoard[i][j] instanceof Blank){
+			//System.out.println("works");
 
+
+			blockBoard[i][j].setAlreadyChecked(true);
 			for(int a = i-1;a< i+1; a++){
 				for(int b = j-1;b<j+1;b++){
+					//System.out.print(b);
 
-					try{
-						if(blockBoard[a][b]!=null){
-							//blockBoard[i][j].setAlreadyChecked(true);
-							if(a == i && b == j){
-								b=j++;
-							}
+					//if( a!= -1 || a!= 10 || b!= -1 || b!= 10){
+						
+						if(blockBoard[a][b].isAlreadyChecked() == false){
 
-							else{
-								if(blockBoard[i][j].getNumOfMinesAround() == 0){
-									if(blockBoard[a][b] instanceof Blank){
-										System.out.println("test");
-										checkForWhite(a,b);
-									}
+							if(blockBoard[a][b] instanceof Blank){
+								if(blockBoard[a][b].getNumOfMinesAround() == 0){
+
+									checkForWhite(a,b);
+
 								}
-
-							}
+								else {
+									boardButtons[a][b].setVisible(false);
+									blockBoard[a][b].setAlreadyChecked(true);
+								}
+							} 
 						}
+					
+					
 
-					}catch(Exception ArrayIndexOutOfBoundsException){
+				//	
+			
+				}					
 
-					}
-					//}					
-
-				}
 			}
-
 		}
 
+
 	}
+
+
 
 
 	/*

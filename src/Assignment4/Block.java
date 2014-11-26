@@ -3,7 +3,7 @@ package Assignment4;
 public class Block {
 	
 	private int numOfMinesAround=0;
-	private boolean alreadyChecked;
+	private boolean alreadyChecked=false;
 	
 
 
