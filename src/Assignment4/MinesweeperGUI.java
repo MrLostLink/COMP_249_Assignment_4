@@ -2,10 +2,12 @@ package Assignment4;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,11 +30,8 @@ public class MinesweeperGUI extends JFrame {
 
 		gameGUI = new JFrame("Enhanced Minesweeper"); // Title of the Window
 		gameGUI.setSize(335, 450); // 400 550
-		gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // This will
-		// close the
-		// frame when
-		// you press X.
-		// IMPORTANT
+		gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // This will close the frame when you press X.
+		// ^ IMPORTANT
 		gameGUI.getContentPane().setBackground(Color.CYAN);
 		gameGUI.setLayout(null);
 
@@ -87,7 +86,7 @@ public class MinesweeperGUI extends JFrame {
 		menuBar.add(gameMenu);
 		gameGUI.setJMenuBar(menuBar);
 
-		// Panel for minesweeper board
+		// Panel for Minesweeper board
 		boardPanel = new JPanel();
 		GridLayout experimentLayout = new GridLayout(10, 10);
 		boardPanel.setLayout(experimentLayout);
@@ -103,9 +102,7 @@ public class MinesweeperGUI extends JFrame {
 			for (int y = 0; y < boardButtons[x].length; y++) {
 
 				boardButtons[x][y] = new JButton();
-
-				// boardButtons[x][y].setVisible(true);
-
+				boardButtons[x][y].setMargin(new Insets(0, 0, 0, 0));
 				// final because they will not change values
 				final JButton clickedButton = boardButtons[x][y];
 				final Block b = blockBoard[x][y];
@@ -122,19 +119,27 @@ public class MinesweeperGUI extends JFrame {
 						if (b instanceof Blank) {
 
 							if (b.getNumOfMinesAround() == 0) {
-
+								clickedButton.setVisible(false);
 								checkForWhite(rows, column);
+								
+							}
+							else
+							{
+								displayNumberBlock(clickedButton ,b.getNumOfMinesAround());
 							}
 							// System.out.println("B");
 							// c.setVisible(true);
-
 							// clickedButton.
 
 						}
 						// case of mines
 						if (b instanceof Mines) {
 							System.out.println("M");
-
+							ImageIcon mineIMG = new ImageIcon(this.getClass().getResource("img/mine.png"));
+							clickedButton.setIcon(mineIMG);
+							clickedButton.setDisabledIcon(mineIMG);
+							clickedButton.setEnabled(false); 
+							    
 						}
 						// case of treasure
 						if (b instanceof Treasure) {
@@ -143,7 +148,6 @@ public class MinesweeperGUI extends JFrame {
 
 						}
 
-						clickedButton.setVisible(false);
 						// clickedButton.setBorderPainted(true);
 
 					}
@@ -157,7 +161,7 @@ public class MinesweeperGUI extends JFrame {
 		}
 
 		gameGUI.add(boardPanel);
-
+		
 		// Sign In Window/Prompt
 		signIN = new JFrame("Enhanced Minesweeper");
 		signIN.setSize(350, 100);
@@ -187,6 +191,16 @@ public class MinesweeperGUI extends JFrame {
 
 	}
 
+	protected void displayNumberBlock(JButton clickedButton, int numOfMinesAround) {
+		StringBuilder filePath = new StringBuilder();
+		filePath.append("img/").append(String.valueOf(numOfMinesAround)).append(".png");
+		ImageIcon numIMG = new ImageIcon(this.getClass().getResource(filePath.toString()));
+		clickedButton.setIcon(numIMG);
+		clickedButton.setDisabledIcon(numIMG);
+		clickedButton.setEnabled(false); 
+		
+	}
+
 	private void doCheckAround(Block b) {
 		// b = new Block[10][10];
 
@@ -195,11 +209,10 @@ public class MinesweeperGUI extends JFrame {
 	// THE MAJESTIC RECURSION METHOD
 	private void checkForWhite(int i, int j) {
 
-		boardButtons[i][j].setVisible(false);
-
+		
 		// Checks that block is blank & 0
 		if (blockBoard[i][j] instanceof Blank) {
-
+			boardButtons[i][j].setVisible(false);
 			blockBoard[i][j].setAlreadyChecked(true);
 			for (int a = i - 1; a <= i + 1; a++) {
 				for (int b = j - 1; b <= j + 1; b++) {
@@ -208,15 +221,13 @@ public class MinesweeperGUI extends JFrame {
 
 						if (!blockBoard[a][b].isAlreadyChecked()) {
 
-							boardButtons[a][b].setVisible(false);
 
 							if (blockBoard[a][b] instanceof Blank) {
 								if (blockBoard[a][b].getNumOfMinesAround() == 0) {
-
 									checkForWhite(a, b);
 
-								} else {
-
+								} else {	
+									boardButtons[a][b].doClick();
 									blockBoard[a][b].setAlreadyChecked(true);
 
 								}

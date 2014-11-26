@@ -1,13 +1,6 @@
 package Assignment4;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
-
-import Assignment3.ConcordiaMembers;
 
 public class Game{
 
@@ -105,7 +98,7 @@ public class Game{
 	//Create method land on mine(What game will do when player lands on mine(s))
 	private void stepOnMine(){
 		
-		((Mines) board).mineDamage(getLives());
+		//((Mines) board).mineDamage(getLives());
 		
 		if(getLives() <= 0){
 			//gameover
@@ -122,19 +115,19 @@ public class Game{
 		
 		if(num%2==0 && num<=10){
 			
-			((Treasure) board).getProbe(getNumOfProbs());//(5/30)
+			//((Treasure) board).getProbe(getNumOfProbs());//(5/30)
 			return;
 			
 		} else{
 			if(num == 2){
-				((Treasure) board).immortal();//(1/30)
+				//((Treasure) board).immortal();//(1/30)
 				return;
 			
 			} else if(num%2!=0 && num>=16 ){
-				((Treasure) board).getLives(3);//(8/30)
+				//((Treasure) board).getLives(3);//(8/30)
 				return;
 			} else {
-				((Treasure) board).bonusPoints(500);//(16/30)
+				//((Treasure) board).bonusPoints(500);//(16/30)
 				return;
 			}
 		}
