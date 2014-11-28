@@ -1,8 +1,15 @@
 package Assignment4;
 
-public class Treasure extends Block{
+import java.io.Serializable;
+
+public class Treasure extends Block implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//If player gets lives are reward
 	public void getLives(int lives){
 		lives+=3;

@@ -1,8 +1,14 @@
 package Assignment4;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Mines extends Block{
+public class Mines extends Block implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @param args

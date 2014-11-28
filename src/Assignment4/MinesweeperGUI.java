@@ -6,6 +6,14 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,16 +26,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class MinesweeperGUI extends JFrame {
+public class MinesweeperGUI extends JFrame implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 
 	private JFrame gameGUI, signIN;
 	private JPanel boardPanel;
 	private JButton[][] boardButtons = new JButton[10][10];
 	private Game gameBoard = new Game();
 	private Block[][] blockBoard = gameBoard.createNewBoard();
-
+	
+	
 	public MinesweeperGUI() {
-
 		gameGUI = new JFrame("Enhanced Minesweeper"); // Title of the Window
 		gameGUI.setSize(335, 450); // 400 550
 		gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // This will close the frame when you press X.
@@ -39,20 +55,32 @@ public class MinesweeperGUI extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu gameMenu = new JMenu("Game");
 
-		gameMenu.setMnemonic(KeyEvent.VK_G);
-
 		JMenuItem gameNew = new JMenuItem("New Game(N)");
 		gameNew.setMnemonic(KeyEvent.VK_N);
 		gameNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				// IMPLEMENT METHOD NEWBOARD
+				gameGUI.dispose();
+				gameBoard = new Game();
+				blockBoard = gameBoard.createNewBoard();
+				gameGUI.setVisible(true);
 			}
 		});
 		JMenuItem gameLoad = new JMenuItem("Load Game(L)");
 		gameLoad.setMnemonic(KeyEvent.VK_L);
 		gameLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				// Read existing file
+				blockBoard = readFromSerializedFile(new File("Board.dat"));
+
+			for(int x = 0; x<10;x++){
+				for(int y = 0; y<10;y++){
+					if(blockBoard[x][y].isAlreadyChecked()==true){
+						boardButtons[x][y].doClick();
+					
+					}
+				}
+			
+			}
+			
 			}
 		});
 
@@ -60,8 +88,8 @@ public class MinesweeperGUI extends JFrame {
 		gameSave.setMnemonic(KeyEvent.VK_S);
 		gameLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				// Print new file that overrides previous one IF it already
-				// exists
+			    writeToSerializedFile(new File("Board.dat"), blockBoard);
+
 			}
 		});
 
@@ -110,7 +138,7 @@ public class MinesweeperGUI extends JFrame {
 				// clickedButton.setBorder(border);
 				final JTextArea c = new JTextArea();
 				final int rows = x;
-				final int column = y;
+				final int columns = y;
 
 				boardButtons[x][y].addActionListener(new ActionListener() {
 					@Override
@@ -121,12 +149,14 @@ public class MinesweeperGUI extends JFrame {
 
 							if (b.getNumOfMinesAround() == 0) {
 								clickedButton.setVisible(false);
-								checkForWhite(rows, column);
+								blockBoard[rows][columns].setAlreadyChecked(true);
+								checkForWhite(rows, columns);
 								
 							}
 							else
 							{
 								displayNumberBlock(clickedButton ,b.getNumOfMinesAround());
+								blockBoard[rows][columns].setAlreadyChecked(true);
 							}
 							// System.out.println("B");
 							// c.setVisible(true);
@@ -140,11 +170,11 @@ public class MinesweeperGUI extends JFrame {
 							clickedButton.setIcon(mineIMG);
 							clickedButton.setDisabledIcon(mineIMG);
 							clickedButton.setEnabled(false); 
-							    
+							blockBoard[rows][columns].setAlreadyChecked(true);
 						}
 						// case of treasure
 						if (b instanceof Treasure) {
-
+							blockBoard[rows][columns].setAlreadyChecked(true);
 							System.out.println("T");
 
 						}
@@ -245,16 +275,46 @@ public class MinesweeperGUI extends JFrame {
 
 	}
 
-	/*
-	 * public void revealBoard(Block[][] board){
-	 * 
-	 * for(int x = 0; x<board.length;x++){ for (int y = 0; y<board[].getSize();
-	 * y++){ if(board[x][y].?revealed? == false){ boardButtons[x][y].doClick();
-	 * } } }
-	 * 
-	 * }
-	 */
+	private static void writeToSerializedFile(File file, Block[][] blockBoard) {
+	    try {
+	        ObjectOutputStream output = new ObjectOutputStream(
+	                                    new FileOutputStream(file));
+	        output.writeObject(blockBoard);
+	    } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
 
+	private static Block[][] readFromSerializedFile(File file) {
+	    Block[][] blockBoard = null;
+	    try {
+	        ObjectInputStream input = new ObjectInputStream(
+	                                  new FileInputStream(file));
+	        blockBoard = (Block[][]) input.readObject();
+	    } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (ClassNotFoundException e) {
+	       e.printStackTrace();
+	    }
+	    return blockBoard;
+	}
+
+	
+	public void revealBoard(){
+	  for (int x = 0; x <= 9;x++){
+		  for (int y = 0; y<= 9; y++){
+			  boardButtons[x][y].doClick();
+		  }
+		  
+	  }
+		  
+	  
+	  }
+	  
 	public void gameboard() {
 		for (int x = 0; x <= 9; x++) {
 			for (int y = 0; y <= 9; y++) {

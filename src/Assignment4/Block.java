@@ -1,7 +1,13 @@
 package Assignment4;
 
-public class Block {
+import java.io.Serializable;
+
+public class Block implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int numOfMinesAround=0;
 	private boolean alreadyChecked=false;
 	

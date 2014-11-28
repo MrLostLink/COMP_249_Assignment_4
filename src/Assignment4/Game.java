@@ -1,9 +1,14 @@
 package Assignment4;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Game{
+public class Game implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int size=10;
 	private int numOfProbs = 0;
 	private int lives=3;
