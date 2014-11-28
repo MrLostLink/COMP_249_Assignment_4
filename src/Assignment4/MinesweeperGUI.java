@@ -41,9 +41,24 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 	private JButton[][] boardButtons = new JButton[10][10];
 	private Game gameBoard = new Game();
 	private Block[][] blockBoard = gameBoard.createNewBoard();
+<<<<<<< HEAD
 	
 	
 	public MinesweeperGUI() {
+=======
+<<<<<<< HEAD
+	
+	private String userName;
+	
+
+	public MinesweeperGUI() {
+		
+=======
+
+	public MinesweeperGUI() {
+
+>>>>>>> origin/master
+>>>>>>> origin/master
 		gameGUI = new JFrame("Enhanced Minesweeper"); // Title of the Window
 		gameGUI.setSize(335, 450); // 400 550
 		gameGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // This will close the frame when you press X.
@@ -51,6 +66,7 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 		gameGUI.setResizable(false); //Disables Resize
 		gameGUI.getContentPane().setBackground(Color.CYAN);
 		gameGUI.setLayout(null);
+		
 
 		JMenuBar menuBar = new JMenuBar();
 		JMenu gameMenu = new JMenu("Game");
@@ -59,10 +75,18 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 		gameNew.setMnemonic(KeyEvent.VK_N);
 		gameNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+<<<<<<< HEAD
 				gameGUI.dispose();
 				gameBoard = new Game();
 				blockBoard = gameBoard.createNewBoard();
 				gameGUI.setVisible(true);
+=======
+<<<<<<< HEAD
+				revealBoard();
+=======
+				// IMPLEMENT METHOD NEWBOARD
+>>>>>>> origin/master
+>>>>>>> origin/master
 			}
 		});
 		JMenuItem gameLoad = new JMenuItem("Load Game(L)");
@@ -119,6 +143,14 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 		boardPanel = new JPanel();
 		GridLayout experimentLayout = new GridLayout(10, 10);
 		boardPanel.setLayout(experimentLayout);
+<<<<<<< HEAD
+		boardPanel.setLayout(new GridLayout(10,10));
+		boardPanel.setBounds(10, 10, 300, 300);
+
+
+		// Border border = new LineBorder(Color.BLACK,1);
+
+=======
 		// boardPanel.setLayout(new GridLayout(10,10));
 		boardPanel.setBounds(10, 10, 300, 300);
 
@@ -126,22 +158,35 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 
 		// Border border = new LineBorder(Color.BLACK,1);
 
+>>>>>>> origin/master
 		// Create GUI board
 		for (int x = 0; x < boardButtons.length; x++) {
 			for (int y = 0; y < boardButtons[x].length; y++) {
 
 				boardButtons[x][y] = new JButton();
+<<<<<<< HEAD
+
+				
+				// final because they will not change values
+				final JButton clickedButton = boardButtons[x][y];
+				final Block b = blockBoard[x][y];
+				//final JTextArea c = new JTextArea();
+=======
 				boardButtons[x][y].setMargin(new Insets(0, 0, 0, 0));
 				// final because they will not change values
 				final JButton clickedButton = boardButtons[x][y];
 				final Block b = blockBoard[x][y];
 				// clickedButton.setBorder(border);
 				final JTextArea c = new JTextArea();
+>>>>>>> origin/master
 				final int rows = x;
 				final int columns = y;
 
 				boardButtons[x][y].addActionListener(new ActionListener() {
+<<<<<<< HEAD
+=======
 					@Override
+>>>>>>> origin/master
 					public void actionPerformed(ActionEvent event) {
 
 						// case of blank
@@ -156,7 +201,20 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 							else
 							{
 								displayNumberBlock(clickedButton ,b.getNumOfMinesAround());
+<<<<<<< HEAD
 								blockBoard[rows][columns].setAlreadyChecked(true);
+=======
+<<<<<<< HEAD
+								gameBoard.step(b);
+							}
+						
+						}
+						
+						// case of mines
+						if (b instanceof Mines) {
+							gameBoard.step(b);
+=======
+>>>>>>> origin/master
 							}
 							// System.out.println("B");
 							// c.setVisible(true);
@@ -166,11 +224,32 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 						// case of mines
 						if (b instanceof Mines) {
 							System.out.println("M");
+>>>>>>> origin/master
 							ImageIcon mineIMG = new ImageIcon(this.getClass().getResource("img/mine.png"));
 							clickedButton.setIcon(mineIMG);
 							clickedButton.setDisabledIcon(mineIMG);
 							clickedButton.setEnabled(false); 
+<<<<<<< HEAD
 							blockBoard[rows][columns].setAlreadyChecked(true);
+=======
+<<<<<<< HEAD
+							
+							System.out.println(((Mines) b).getNumOfMines());
+							    
+						}
+						
+						// case of treasure
+						if (b instanceof Treasure) {
+							gameBoard.step(b);
+							clickedButton.setBackground(Color.GREEN);
+							clickedButton.setEnabled(false);
+							
+						}
+
+		
+=======
+							    
+>>>>>>> origin/master
 						}
 						// case of treasure
 						if (b instanceof Treasure) {
@@ -180,6 +259,7 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 						}
 
 						// clickedButton.setBorderPainted(true);
+>>>>>>> origin/master
 
 					}
 				});
@@ -189,7 +269,13 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 
 			}
 
+<<<<<<< HEAD
+		}//end of buttons
+		
+		
+=======
 		}
+>>>>>>> origin/master
 
 		gameGUI.add(boardPanel);
 		
@@ -201,19 +287,28 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 		// frame when
 		// you press X.
 		// IMPORTANT
+<<<<<<< HEAD
+		
+		
+=======
 
+>>>>>>> origin/master
 		JLabel enterName = new JLabel("Enter your name:");
 		final JTextField nameField = new JTextField(20);
 		JPanel infoPanel = new JPanel();
 		JButton submitName = new JButton("Enter");
+<<<<<<< HEAD
+		submitName.addActionListener(new ActionListener() {	
+=======
 		submitName.addActionListener(new ActionListener() {
+>>>>>>> origin/master
 			public void actionPerformed(ActionEvent event) {
-				String nameFieldValue = nameField.getText();
+				userName = nameField.getText();
 				signIN.dispose();
 				gameGUI.setVisible(true);
 			}
 		});
-
+		
 		infoPanel.add(enterName);
 		infoPanel.add(nameField);
 		infoPanel.add(submitName);
@@ -232,21 +327,76 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 		
 	}
 
+<<<<<<< HEAD
+=======
 	private void doCheckAround(Block b) {
 		// b = new Block[10][10];
 
 	}
+>>>>>>> origin/master
 
 	// THE MAJESTIC RECURSION METHOD
 	private void checkForWhite(int i, int j) {
 
+<<<<<<< HEAD
+		gameBoard.step(blockBoard[i][j]);
+=======
 		
+>>>>>>> origin/master
 		// Checks that block is blank & 0
 		if (blockBoard[i][j] instanceof Blank) {
 			boardButtons[i][j].setVisible(false);
 			blockBoard[i][j].setAlreadyChecked(true);
 			for (int a = i - 1; a <= i + 1; a++) {
 				for (int b = j - 1; b <= j + 1; b++) {
+<<<<<<< HEAD
+
+					try {
+
+						if (!blockBoard[a][b].isAlreadyChecked()) {
+
+
+							if (blockBoard[a][b] instanceof Blank) {
+								if (blockBoard[a][b].getNumOfMinesAround() == 0) {
+									checkForWhite(a, b);
+
+								} else {	
+									boardButtons[a][b].doClick();
+									blockBoard[a][b].setAlreadyChecked(true);
+
+								}
+							}
+							if(blockBoard[a][b] instanceof Treasure){
+								boardButtons[a][b].doClick();
+							}
+
+						}
+					} catch (Exception ArrayIndexOutOfBoundsException) {
+
+					}
+
+				}
+			}
+		}
+
+	}
+
+	
+	  public void revealBoard(){
+	  for (int x = 0; x <= 9;x++){
+		  for (int y = 0; y<= 9; y++){
+			  boardButtons[x][y].doClick();
+		  }
+		  
+	  }
+		  
+	  
+	  }
+	  
+	  /*
+	   * For developing purpose, this will display answer
+	   */
+=======
 
 					try {
 
@@ -303,6 +453,7 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 	    return blockBoard;
 	}
 
+<<<<<<< HEAD
 	
 	public void revealBoard(){
 	  for (int x = 0; x <= 9;x++){
@@ -315,6 +466,9 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 	  
 	  }
 	  
+=======
+>>>>>>> origin/master
+>>>>>>> origin/master
 	public void gameboard() {
 		for (int x = 0; x <= 9; x++) {
 			for (int y = 0; y <= 9; y++) {
@@ -335,11 +489,18 @@ public class MinesweeperGUI extends JFrame implements Serializable{
 			System.out.println("");
 		}
 	}
+<<<<<<< HEAD
+	
+	
+=======
 
+>>>>>>> origin/master
 	public static void main(String[] args) {
-
+		
 		MinesweeperGUI mainInterface = new MinesweeperGUI();
 		mainInterface.gameboard();
+		
+		
 	}
 
 }
