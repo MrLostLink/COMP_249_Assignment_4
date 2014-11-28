@@ -14,6 +14,7 @@ public class Player {
 	private String username;
 	private int finalScore;
 	
+	
 	public Player(){
 		
 	}
@@ -46,10 +47,10 @@ public class Player {
 
 
 	//Save board(Save game)[prints dat. file]
-	private static void writeToSerializedFile(File file, Player player) {
+	private static void writeToSerializedFile(File file) {
 	    try {
 	        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
-	        output.writeObject(player);
+	        
 	    } catch (FileNotFoundException e) {
 	        e.printStackTrace();
 	    } catch (IOException e) {
