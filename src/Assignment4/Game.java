@@ -136,6 +136,7 @@ public class Game{
 	}
 
 	//Create method land on mine(What game will do when player lands on mine(s))
+<<<<<<< HEAD
 	private void stepOnMines(){
 		utility = new Mines();
 
@@ -143,6 +144,14 @@ public class Game{
 			((Mines) utility).mineDamage(getLives());
 		} else {
 
+=======
+	private void stepOnMine(){
+		
+		//((Mines) board).mineDamage(getLives());
+		
+		if(getLives() <= 0){
+			//gameover
+>>>>>>> origin/master
 		}
 	}
 
@@ -157,20 +166,36 @@ public class Game{
 		int num = r.nextInt((end-start)+1)+start;
 
 		if(num%2==0 && num<=10){
+<<<<<<< HEAD
 
 			((Treasure) utility).getProbe(getNumOfProbs());//(5/30)
+=======
+			
+			//((Treasure) board).getProbe(getNumOfProbs());//(5/30)
+>>>>>>> origin/master
 			return;
 
 		} else{
 			if(num == 2){
+<<<<<<< HEAD
 				((Treasure) utility).immortal();//(1/30)
+=======
+				//((Treasure) board).immortal();//(1/30)
+>>>>>>> origin/master
 				return;
 
 			} else if(num%2!=0 && num>=16 ){
+<<<<<<< HEAD
 				((Treasure) utility).getLives(getLives());//(8/30)
 				return;
 			} else {
 				setScore(500);//(16/30)
+=======
+				//((Treasure) board).getLives(3);//(8/30)
+				return;
+			} else {
+				//((Treasure) board).bonusPoints(500);//(16/30)
+>>>>>>> origin/master
 				return;
 			}
 		}
