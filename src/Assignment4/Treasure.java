@@ -5,6 +5,11 @@ import java.io.Serializable;
 public class Treasure extends Block implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//If player gets lives are reward
 	public int getLives(int lives){
 		System.out.println("+3 Lives");

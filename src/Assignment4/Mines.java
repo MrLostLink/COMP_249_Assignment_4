@@ -3,8 +3,27 @@ package Assignment4;
 import java.io.Serializable;
 import java.util.Random;
 
+<<<<<<< HEAD
 public class Mines extends Block implements Serializable{
+=======
+<<<<<<< HEAD
+public class Mines extends Block implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @param args
+	 */
+	private int  numOfMines;
+
+=======
+public class Mines extends Block{
+>>>>>>> origin/master
 	
+>>>>>>> origin/master
 	Random r = new Random();
 	int start = 1;
 	int end = 3;
