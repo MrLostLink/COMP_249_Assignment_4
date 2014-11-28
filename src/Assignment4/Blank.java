@@ -1,6 +1,8 @@
 package Assignment4;
 
-public class Blank extends Block{
+import java.io.Serializable;
+
+public class Blank extends Block implements Serializable{
 
 
 

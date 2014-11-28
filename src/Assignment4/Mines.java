@@ -1,8 +1,9 @@
 package Assignment4;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Mines extends Block{
+public class Mines extends Block implements Serializable{
 	
 	Random r = new Random();
 	int start = 1;
@@ -25,8 +26,8 @@ public class Mines extends Block{
 	
 	}
 
-	public void mineDamage(int lives){
-		lives-=1;
+	public int mineDamage(int lives){
+		return --lives;
 	}
 
 

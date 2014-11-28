@@ -1,9 +1,16 @@
 package Assignment4;
 
-public class Block {
+import java.io.Serializable;
+
+public class Block  implements Serializable{
 	
 	private  int numOfMinesAround=0;
 	private boolean alreadyChecked=false;
+	
+	public Block(){
+		this.alreadyChecked = isAlreadyChecked();
+		
+	}
 	
 
 
@@ -13,18 +20,24 @@ public class Block {
 	}
 	
 	public void setNumOfMinesAround(int num) {
+		
 		numOfMinesAround = numOfMinesAround + num;
+		
 	}
 
 
 	public boolean isAlreadyChecked() {
+		
 		return alreadyChecked;
+		
 	}
 
 
 
 	public void setAlreadyChecked(boolean alreadyChecked) {
+		
 		this.alreadyChecked = alreadyChecked;
+		
 	}
 	
 }

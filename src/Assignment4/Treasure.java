@@ -1,26 +1,27 @@
 package Assignment4;
 
-public class Treasure extends Block{
+import java.io.Serializable;
+
+public class Treasure extends Block implements Serializable{
 	
 	
 	//If player gets lives are reward
-	public void getLives(int lives){
-		lives+=3;
+	public int getLives(int lives){
+		System.out.println("+3 Lives");
+		return lives+=3;
 	}
 	
 	//Player gets prob
 	public int getProbe(int numOfProb){
+		System.out.println("Probes");
 		return numOfProb++;
-	}
-	
-	//Player gets points
-	public void bonusPoints(int Points){
-		Points++;
+		
 	}
 	
 	//Player becomes immortal
-	public boolean immortal(){
-		return true;
+	public int immortal(int lives){
+		System.out.println("Immortal activated");
+		return lives+=99;
 	}
 	
 }
